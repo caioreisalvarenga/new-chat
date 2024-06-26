@@ -9,4 +9,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/register', [AuthenticateUser::class, 'register'])->name('register');
+Route::post('/login', [AuthenticateUser::class, 'login'])->name('login');
 
+Route::group(["middleware" => "auth:sanctum"], function () {
+    Route::get('/profileIdAuth', [AuthenticateUser::class, 'profileIdAuth'])->name('profileIdAuth');
+    Route::get('/profileAuth', [AuthenticateUser::class, 'profileAuth'])->name('profileAuth');
+});
