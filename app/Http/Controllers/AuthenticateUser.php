@@ -31,6 +31,11 @@ class AuthenticateUser extends Controller
         return $this->authenticateUserService->login($request);
     }
 
+    public function viewLogin(Request $request)
+    {
+        return $this->authenticateUserService->viewLogin($request);
+    }
+
     public function logout(Request $request)
     {
         return $this->authenticateUserService->logout($request);

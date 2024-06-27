@@ -91,6 +91,11 @@ class AuthenticateUserService extends Controller
         }
     }
 
+    public function viewLogin()
+    {
+        return view('login');
+    }
+
     public function logout(){
         try {
             auth()->user()->tokens()->delete();
