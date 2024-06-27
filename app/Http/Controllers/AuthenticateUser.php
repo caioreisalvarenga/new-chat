@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticateUser extends Controller
@@ -101,7 +100,7 @@ class AuthenticateUser extends Controller
         $userData = auth()->user();
         return response()->json([
             'status' => true,
-            'message' => 'Profile Information',
+            'message' => 'Profile Logged',
             'data' => $userData,
         ], 200);
     }
