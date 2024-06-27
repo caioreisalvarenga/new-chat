@@ -21,6 +21,11 @@ class AuthenticateUser extends Controller
         return $this->authenticateUserService->register($request);
     }
 
+    public function viewRegister()
+    {
+        return $this->authenticateUserService->viewRegister();
+    }
+
     public function login(Request $request)
     {
         return $this->authenticateUserService->login($request);

@@ -48,6 +48,11 @@ class AuthenticateUserService extends Controller
         }
     }
 
+    public function viewRegister()
+    {
+        return view('register');
+    }
+    
     public function login(Request $request): JsonResponse
     {
         try {
