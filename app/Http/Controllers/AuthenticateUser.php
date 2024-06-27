@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\AuthenticateUserService;
 
 class AuthenticateUser extends Controller
 {
@@ -17,26 +18,26 @@ class AuthenticateUser extends Controller
 
     public function register(Request $request)
     {
-        $this->authenticateUserService->register($request);
+        return $this->authenticateUserService->register($request);
     }
 
     public function login(Request $request)
     {
-        $this->authenticateUserService->login($request);
+        return $this->authenticateUserService->login($request);
     }
 
     public function profileIdAuth()
     {
-        $this->authenticateUserService->profileIdAuth();
+        return $this->authenticateUserService->profileIdAuth();
     }
 
     public function allProfile(Request $request)
     {
-        $this->authenticateUserService->allProfile($request);
+        return $this->authenticateUserService->allProfile($request);
     }
 
     public function deleteProfile(User $user)
     {
-        $this->authenticateUserService->deleteProfile($user);
+        return $this->authenticateUserService->deleteProfile($user);
     }
 }
