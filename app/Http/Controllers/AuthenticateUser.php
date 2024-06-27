@@ -26,6 +26,11 @@ class AuthenticateUser extends Controller
         return $this->authenticateUserService->login($request);
     }
 
+    public function logout(Request $request)
+    {
+        return $this->authenticateUserService->logout($request);
+    }
+
     public function profileIdAuth()
     {
         return $this->authenticateUserService->profileIdAuth();

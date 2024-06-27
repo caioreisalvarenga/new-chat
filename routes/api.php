@@ -9,5 +9,6 @@ Route::post('/login', [AuthenticateUser::class, 'login'])->name('login');
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::get('/profileIdAuth', [AuthenticateUser::class, 'profileIdAuth'])->name('profileIdAuth');
     Route::get('/allProfile', [AuthenticateUser::class, 'allProfile'])->name('allProfile');
+    Route::get('/logout', [AuthenticateUser::class, 'logout'])->name('logout');
     Route::delete('/deleteProfile/{user}', [AuthenticateUser::class, 'deleteProfile'])->name('deleteProfile');
 });

@@ -86,6 +86,24 @@ class AuthenticateUserService extends Controller
         }
     }
 
+    public function logout(){
+        try {
+            auth()->user()->tokens()->delete();
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'User logged out successfully',
+                'data' => [],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to logout',
+                'errors' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
     public function profileIdAuth(): JsonResponse
     {
         try {
@@ -99,8 +117,8 @@ class AuthenticateUserService extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage(),
-                'erros' => $th
+                'message' => 'Failed to logout',
+                'errors' => $th->getMessage(),
             ], 500);
         }
     }
@@ -117,8 +135,8 @@ class AuthenticateUserService extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage(),
-                'erros' => $th
+                'message' => 'Failed to logout',
+                'errors' => $th->getMessage(),
             ], 500);
         }
     }
@@ -139,8 +157,8 @@ class AuthenticateUserService extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage(),
-                'erros' => $th
+                'message' => 'Failed to logout',
+                'errors' => $th->getMessage(),
             ], 500);
         }
     }
