@@ -86,23 +86,60 @@ class AuthenticateUser extends Controller
 
     public function profileIdAuth()
     {
-        $userData = auth()->user();
-        return response()->json([
-            'status' => true,
-            'message' => 'Profile Information',
-            'data' => $userData,
-            'id' => auth()->user()->id
-        ], 200);
+        try {
+            $userData = auth()->user();
+            return response()->json([
+                'status' => true,
+                'message' => 'Profile Logged Information',
+                'data' => $userData,
+                'id' => auth()->user()->id
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+                'erros' => $th
+            ], 500);
+        }
     }
 
     public function allProfile(Request $request)
     {
-        $users = User::all();
+        try {
+            $users = User::all();
+            return response()->json([
+                'status' => true,
+                'message' => 'All users here',
+                'data' => $users,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+                'erros' => $th
+            ], 500);
+        }
+    }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'All users here',
-            'data' => $users,
-        ], 200);
+    public function deleteProfile(User $user)
+    {
+        try {
+            if (!$user) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+    
+            $user->delete();
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'User deleted successfully',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+                'erros' => $th
+            ], 500);
+        }
     }
 }
