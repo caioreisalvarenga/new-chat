@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthenticateUser;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthenticateUser::class, 'register'])->name('register');
-Route::get('/register', [AuthenticateUser::class, 'viewRegister'])->name('viewRegister');
+Route::get('/viewregister', [AuthenticateUser::class, 'viewRegister'])->name('viewRegister');
 Route::post('/login', [AuthenticateUser::class, 'login'])->name('login');
 
 Route::group(["middleware" => "auth:sanctum"], function () {
