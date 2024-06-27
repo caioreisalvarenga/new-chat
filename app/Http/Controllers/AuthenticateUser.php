@@ -31,9 +31,9 @@ class AuthenticateUser extends Controller
         return $this->authenticateUserService->profileIdAuth();
     }
 
-    public function allProfile(Request $request)
+    public function allProfile()
     {
-        return $this->authenticateUserService->allProfile($request);
+        return $this->authenticateUserService->allProfile();
     }
 
     public function deleteProfile(User $user)

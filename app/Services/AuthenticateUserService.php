@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticateUserService extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make($request->all(), [
@@ -47,7 +48,7 @@ class AuthenticateUserService extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make($request->all(), [
@@ -85,7 +86,7 @@ class AuthenticateUserService extends Controller
         }
     }
 
-    public function profileIdAuth()
+    public function profileIdAuth(): JsonResponse
     {
         try {
             $userData = auth()->user();
@@ -104,7 +105,7 @@ class AuthenticateUserService extends Controller
         }
     }
 
-    public function allProfile(Request $request)
+    public function allProfile(): JsonResponse
     {
         try {
             $users = User::all();
@@ -122,7 +123,7 @@ class AuthenticateUserService extends Controller
         }
     }
 
-    public function deleteProfile(User $user)
+    public function deleteProfile(User $user): JsonResponse
     {
         try {
             if (!$user) {
