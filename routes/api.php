@@ -13,5 +13,5 @@ Route::post('/login', [AuthenticateUser::class, 'login'])->name('login');
 
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::get('/profileIdAuth', [AuthenticateUser::class, 'profileIdAuth'])->name('profileIdAuth');
-    Route::get('/profileAuth', [AuthenticateUser::class, 'profileAuth'])->name('profileAuth');
+    Route::get('/allProfile', [AuthenticateUser::class, 'allProfile'])->name('allProfile');
 });

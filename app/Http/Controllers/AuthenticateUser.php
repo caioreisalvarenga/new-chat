@@ -95,13 +95,14 @@ class AuthenticateUser extends Controller
         ], 200);
     }
 
-    public function profileAuth(Request $request)
+    public function allProfile(Request $request)
     {
-        $userData = auth()->user();
+        $users = User::all();
+
         return response()->json([
             'status' => true,
-            'message' => 'Profile Logged',
-            'data' => $userData,
+            'message' => 'All users here',
+            'data' => $users,
         ], 200);
     }
 }
