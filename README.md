@@ -11,7 +11,7 @@
 Este é um projeto de chat em tempo real feito com Laravel e blade na camada view, esse projeto foi feito usando MVC junto com Services, com Requests, com Laravel fortemente tipado, 
 com integração de front e back end, desenvolvido totalmente em inglês para seguir um padrão de desenvolvimento, também foi desenvolvido um sistema de logs na autenticação usando
 Sanctum conforme foi pedido, para o serviço de chat foi usado o Chatify porque ele já traz todas as funcionalidades pedidas no teste, desenvolvi também algumas funcionalidades a mais 
-em cima do sanctum que não foram pedidas, configurei todo o postman pra testar as rotas certinho.
+em cima do sanctum que não foram pedidas, configurei todo o postman pra testar as rotas certinho, também criei um projeto base primeiramente, depois criei as branchs relacionadas a cada tarefa macro que estava fazendo.
 
 Foi um projeto feito com muito empenho e dedicação.
 
@@ -28,3 +28,5 @@ Para execuar o projeto, siga as instruções:
 - Rode novamente o comando php artisan migrate porque os serviços do sanctum e do chatify geram outras tabelas.
 
 **OBS**: o env pré configurado está configurado usando o banco postgre, configure para o teu determinado banco de dados.
+**OBS2**: ao rodar o projeto, rode na branch master, que é a branch que eu fiz merge com todas as outras branchs depois do desenvolvimento.
+
