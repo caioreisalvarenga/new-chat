@@ -7,9 +7,8 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticateUserService extends Controller
 {
@@ -31,7 +30,7 @@ class AuthenticateUserService extends Controller
                 'email' => $request->email,
                 'password' => $request->password
             ]);
-
+            Log::channel('register')->info('User created successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'User created successfully',
@@ -73,6 +72,7 @@ class AuthenticateUserService extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
+            Log::channel('register')->info('User' . $user . 'logged in successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'User logged in successfully',
@@ -94,8 +94,8 @@ class AuthenticateUserService extends Controller
 
     public function logout(){
         try {
-            auth()->user()->tokens()->delete();
-    
+            $userAuth = auth()->user()->tokens()->delete();
+            Log::channel('register')->info('User' . $userAuth . 'logged in successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'User logged out successfully',
@@ -114,6 +114,7 @@ class AuthenticateUserService extends Controller
     {
         try {
             $userData = auth()->user();
+            Log::channel('profile')->info('Profile' . $userData . 'logged searched information');
             return response()->json([
                 'status' => true,
                 'message' => 'Profile Logged Information',
@@ -133,6 +134,7 @@ class AuthenticateUserService extends Controller
     {
         try {
             $users = User::all();
+            Log::channel('profile')->info('Was searched allProfile now');
             return response()->json([
                 'status' => true,
                 'message' => 'All users here',
@@ -155,7 +157,7 @@ class AuthenticateUserService extends Controller
             }
     
             $user->delete();
-    
+            Log::channel('profile')->info('User deleted successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'User deleted successfully',
