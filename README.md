@@ -27,6 +27,6 @@ Para execuar o projeto, siga as instruções:
 - Instale o Chatify para o serviço de chat: https://chatify.munafio.com/
 - Rode novamente o comando php artisan migrate porque os serviços do sanctum e do chatify geram outras tabelas.
 
-**OBS**: o env pré configurado está configurado usando o banco postgre, configure para o teu determinado banco de dados.
+**OBS**: o env pré configurado está configurado usando o banco postgre, configure para o teu determinado banco de dados.<br>
 **OBS2**: ao rodar o projeto, rode na branch master, que é a branch que eu fiz merge com todas as outras branchs depois do desenvolvimento.
 
