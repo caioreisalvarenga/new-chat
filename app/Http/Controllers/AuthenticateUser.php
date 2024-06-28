@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\AuthenticateUserService;
@@ -16,7 +17,7 @@ class AuthenticateUser extends Controller
         $this->authenticateUserService = $authenticateUserService;
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         return $this->authenticateUserService->register($request);
     }
