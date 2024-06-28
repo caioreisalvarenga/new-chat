@@ -10,6 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+use function Laravel\Prompts\alert;
+
 class AuthenticateUserService extends Controller
 {
     public function register(RegisterRequest $request): JsonResponse
@@ -31,17 +33,21 @@ class AuthenticateUserService extends Controller
                 'password' => $request->password
             ]);
             Log::channel('register')->info('User created successfully');
-            return response()->json([
-                'status' => true,
-                'message' => 'User created successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ], 200);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'User created successfully',
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ], 200);
+            }
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage(),
-                'erros' => $validateUser->errors()
-            ], 500);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $th->getMessage(),
+                    'erros' => $validateUser->errors()
+                ], 500);
+            }
         }
     }
 
@@ -49,10 +55,9 @@ class AuthenticateUserService extends Controller
     {
         return view('register');
     }
-    
+
     public function login(LoginRequest $request): JsonResponse
     {
-
         $validateUser = $request->validated();
 
         try {
@@ -73,17 +78,22 @@ class AuthenticateUserService extends Controller
 
             $user = User::where('email', $request->email)->first();
             Log::channel('register')->info('User' . $user . 'logged in successfully');
-            return response()->json([
-                'status' => true,
-                'message' => 'User logged in successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ], 200);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'User logged in successfully',
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ], 200);
+            }
+            return redirect(route('api.send.message'));
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage(),
-                'erros' => $validateUser->errors()
-            ], 500);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $th->getMessage(),
+                    'erros' => $validateUser->errors()
+                ], 500);
+            }
         }
     }
 
@@ -92,7 +102,8 @@ class AuthenticateUserService extends Controller
         return view('login');
     }
 
-    public function logout(){
+    public function logout()
+    {
         try {
             $userAuth = auth()->user()->tokens()->delete();
             Log::channel('register')->info('User' . $userAuth . 'logged in successfully');
@@ -155,7 +166,7 @@ class AuthenticateUserService extends Controller
             if (!$user) {
                 return response()->json(['error' => 'User not found'], 404);
             }
-    
+
             $user->delete();
             Log::channel('profile')->info('User deleted successfully');
             return response()->json([
