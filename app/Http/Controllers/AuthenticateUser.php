@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Services\AuthenticateUserService;
 
 class AuthenticateUser extends Controller
@@ -27,19 +27,19 @@ class AuthenticateUser extends Controller
         return $this->authenticateUserService->viewRegister();
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         return $this->authenticateUserService->login($request);
     }
 
-    public function viewLogin(Request $request)
+    public function viewLogin()
     {
-        return $this->authenticateUserService->viewLogin($request);
+        return $this->authenticateUserService->viewLogin();
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        return $this->authenticateUserService->logout($request);
+        return $this->authenticateUserService->logout();
     }
 
     public function profileIdAuth()

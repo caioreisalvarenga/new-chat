@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -50,15 +51,13 @@ class AuthenticateUserService extends Controller
         return view('register');
     }
     
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        try {
-            $validateUser = Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
 
-            if ($validateUser->fails()) {
+        $validateUser = $request->validated();
+
+        try {
+            if (!$validateUser) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
