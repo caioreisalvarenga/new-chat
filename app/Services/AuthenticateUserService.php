@@ -48,6 +48,11 @@ class AuthenticateUserService extends Controller
         }
     }
 
+    public function viewRegister()
+    {
+        return view('register');
+    }
+    
     public function login(Request $request): JsonResponse
     {
         try {
@@ -84,6 +89,11 @@ class AuthenticateUserService extends Controller
                 'erros' => $validateUser->errors()
             ], 500);
         }
+    }
+
+    public function viewLogin()
+    {
+        return view('login');
     }
 
     public function logout(){
